@@ -5,8 +5,5 @@ export class User {
     email : String;
     password : String;
     state : boolean;
-
-    role :any ;
-
-     entreprise : any;
+ 
 }

@@ -9,12 +9,14 @@ import { HomeModule } from './home/home.module';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login';
+import { AddRoleComponent } from './super_admin/addRole/addRole.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AddRoleComponent
 
   ],
   imports: [

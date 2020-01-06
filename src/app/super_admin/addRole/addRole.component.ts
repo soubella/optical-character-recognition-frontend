@@ -3,20 +3,20 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService, UserService, AuthenticationService } from '../services';
-import {User} from "../models";
+import { AlertService, RoleService, AuthenticationService } from '../../services';
+import {Role} from "../models";
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'addrole.component.html' })
+export class AddRoleComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-  user : User  = { id : 1 ,firstName: '', lastName: '', email:'',password:'' , state: true} ;
+   
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService,
+    private roleService: RoleService,
     private alertService: AlertService
   ) {
     // redirect to home if already logged in
@@ -28,12 +28,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role:[''],
-      entreprise:['']
+      name: ['', Validators.required],
+     
     });
   }
 
@@ -52,7 +48,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    this.userService.register(this.registerForm.value)
+    this.roleService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
         data => {
