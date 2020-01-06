@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
-import { HttpClient , HttpParams} from '@angular/common/http';
+import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+import { AuthenticationService } from './services';
+import { User } from './models';
+
+//import './_content/app.less';
+
+@Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
-  title = 'optical-character-recognition-frontend';
-  constructor(private http: HttpClient) {
+  currentUser: User;
 
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
-  ngOnInit(): void {
-    // Making the HTTP Request
-    this.http
-      .get('')
-      .subscribe(data => {
-        console.log(data['test']);
 
-      })
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }
